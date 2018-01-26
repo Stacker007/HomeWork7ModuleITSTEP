@@ -8,7 +8,7 @@ using namespace std;
 bool simple(int num);
 int main()
 {
-	setlocale()
+	setlocale(LC_ALL, "rus");
 	int num;
 	cout << "Введите число: " ;
 	cin >> num;
