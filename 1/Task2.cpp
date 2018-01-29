@@ -1,25 +1,43 @@
-/*2.Написать функцию, которая возвращает истину, 
-если ее аргумент – простое целое число, и ложь, если 
-не простое. Простое число – это число, которое делиться 
-ТОЛЬКО на 1 и на себя (2, 5, 7, 11 и т.д.).*/
+/*2. Написать функцию frame, которая выводит на экран 
+рамку из звездочек. В качестве параметров функции 
+должны передаваться координаты левого верхнего угла и размеры рамки.*/
 
 #include <iostream>
 using namespace std;
-bool simple(int num);
+void frame(int width, int x, int y);
 int main()
 {
 	setlocale(LC_ALL, "rus");
-	int num;
-	cout << "Введите число: " ;
-	cin >> num;
-	if (simple(num)) cout << "true" << endl;
-	else cout << "false" << endl;	
+	int width, x, y;
+	do {
+		cout << "Введите размер рамки: ";
+		cin >> width;
+		cout << "Введите координату X: ";
+		cin >> x;
+		cout << "Введите координату Y: ";
+		cin >> y;
+		if (width < 1 || x < 0 || y < 0) cout << "Размер должен быть положительным, а координаты неотрицательными!";
+	} while (width < 1 || x < 0 || y < 0);
+	frame(width, x, y);
 	system("pause");
 	return 0;
 }
 
-bool simple(int num) {
-	for (int i = 2; i < num; i++)
-		if (num%i == 0) return false; //Если встречается второй делитель, то false
-	return true;						//если num == 2 или - 2, то i<num не выполняется
+void frame(int width, int x, int y) {
+	for (int i = 0; i < y; i++) printf("\n"); // делаем перевод курсора у раз
+	for (int i = 0; i < width; i++) {			//перебор  строк
+		for (int k = 0; k < x; k++) printf(" ");// В каждой строке отступаем от края x пробелов
+		if (i == 0 || i == (width - 1))         //Первая и последняя строка из звездочек
+			for (int t=0; t< width; t++) printf("*");
+		else
+		{
+			for (int j = 0; j < width ; j++) {
+				if (j == 0 || j == (width - 1)) //остальные строки вида "*    *"
+					printf("*");
+				else printf(" ");
+			}
+		}
+		printf("\n");
+	}
+						
 }
