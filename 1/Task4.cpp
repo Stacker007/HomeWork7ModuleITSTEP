@@ -14,20 +14,24 @@ int main()
 	perPtr = &percent;
 	cout << "Введите число: ";
 	cin >> num;
+	digits(num, perPtr);
 	system("pause");
 	return 0;
 }
 
-void digits(int a, int *perPtr) {
+int digits(int a, int *perPtr) {
 	int count = 0, countOfEven = 0;
 	if (a == 0) {
-		count = 1;
-		countOfEven = 100;
-		re
+		*perPtr = 100;
+		return 1;
 	}
 	while (!a/10)
 	{
-
+		count++;
+		if (a % 2 == 0) countOfEven++;
+		a /= 10;
 	}
+	*perPtr = countOfEven * 100 / count;
+	return count;
 }
 
