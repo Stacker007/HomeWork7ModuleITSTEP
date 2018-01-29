@@ -20,6 +20,6 @@ int main()
 
 bool simple(int num) {
 	for (int i = 2; i < num; i++)
-		if (num%i == 0) return false;
+		if (num%i == 0) return false; //Если встречаетя второй делитель, то false
 	return true;
 }
