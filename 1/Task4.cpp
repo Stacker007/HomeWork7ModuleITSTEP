@@ -1,29 +1,33 @@
-/*4.​ Написать и протестировать функцию largerOf,
-которая заменяет значение двух переменных 
-типа double большим из этих двух значений.*/
+/*5.​ Напишите функцию, которая принимает
+целое число и возвращает количество цифр 
+в числе и процент четных цифр.*/
 
 #include <iostream>
 using namespace std;
-void largeOf (double *a, double *b);
+void digits(int a, int *perPtr);
 int main()
 {	
 	setlocale(LC_ALL, "rus");
-	double firstNum, secondNum;
-	double *firstPtr, *secondPtr;
-	cout << "Введите первое число: ";
-	cin >> firstNum;
-	cout << "Введите второе число: ";
-	cin >> secondNum;	
-	firstPtr = &firstNum;
-	secondPtr = &secondNum;
-	largeOf(firstPtr, secondPtr);	
-	cout << "Первое число: " << firstNum << endl;
-	cout << "Второе число: " << secondNum << endl;
+	int num;
+	int count, percent = -1;
+	int *perPtr;
+	perPtr = &percent;
+	cout << "Введите число: ";
+	cin >> num;
 	system("pause");
 	return 0;
 }
 
-void largeOf(double *a, double *b) {
-	if (*a > *b) *b = *a;
-	else *a = *b;
+void digits(int a, int *perPtr) {
+	int count = 0, countOfEven = 0;
+	if (a == 0) {
+		count = 1;
+		countOfEven = 100;
+		re
+	}
+	while (!a/10)
+	{
+
+	}
 }
+
