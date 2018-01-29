@@ -4,7 +4,7 @@
 
 #include <iostream>
 using namespace std;
-void digits(int a, int *perPtr);
+int digits(int a, int *perPtr);
 int main()
 {	
 	setlocale(LC_ALL, "rus");
@@ -14,7 +14,9 @@ int main()
 	perPtr = &percent;
 	cout << "Введите число: ";
 	cin >> num;
-	digits(num, perPtr);
+	count = digits(num, perPtr);
+	cout << "Количество цифр: " << count << endl;
+	cout << "процент четных цифр: " << percent << endl;
 	system("pause");
 	return 0;
 }
