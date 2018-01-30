@@ -1,53 +1,74 @@
-/*3.​ Напишите функцию, которая определяет 
-минимальный элемент массива (его значение и номер). 
-Внутри функции запрещено использовать команды cin и cout.: 
+/*4.​ Написать функцию, которая в двумерном массиве 
+вещественных чисел меняет знак элементов некоторого 
+столбца на противоположный (номер столбца передавать 
+в качестве параметра). Использовать функцию для 
+преобразования матрицы размером 4х5. Выполнить 
+два варианта такой функции: 
+a) функция, предназначенная для массивов с числом столбцов, равным 5; 
++б) универсальная функция, которую можно использовать при любом числе строк и столбцов.
 */
 
 #include <iostream>
 #include <ctime>
-#define SIZE 10
+#define ROW 30
+#define COL 30
 using namespace std;
-void randArr(int *ptr, int sizeArr);  
-void printArr(int *ptr, int sizeArr); 
-int minimum(int *ptr, int *iptr, int size);
+void randArrD(double *ptr, int sizeArr);  
+void multiRandArrD(double *ptr, int row, int col);
+void printArrD(double *ptr, int sizeArr); 
+void multiPrintArrD(double *ptr, int row, int col);
+void denying(double *ptr, int row, int col, int iCol);
+void denying5COL(double *ptr, int row, int iCol);
 int main()
 {	
 	setlocale(LC_ALL, "rus");
 	srand(time(0));
-	int oneRowArr[SIZE] = {};
-	int indexOf;	
-	int contentOf;
+	double multiRowArr[ROW][COL] = {};
 	cout << "Исходный линейный массив: " << endl;
-	randArr(oneRowArr, SIZE);
-	printArr(oneRowArr, SIZE);
-	cout << endl;
-	contentOf =  minimum(oneRowArr, &indexOf, SIZE);
-	
-	cout << "Индекс мин. элемнета " << indexOf << endl;
-	cout << "Значение мин. элемнета " << contentOf << endl;
+	multiRandArrD(multiRowArr[0], ROW, COL);
+	multiPrintArrD(multiRowArr[0], ROW, COL);	
+	int indexOfcol;
+
+	do {  
+		cout << "Введите индекс столбца: ";
+		cin >> indexOfcol;
+		if (indexOfcol <0 || indexOfcol>(COL - 1)) cout << "Неправильный выбор! ";
+	} while (indexOfcol <0 || indexOfcol>(COL - 1));
+
+	denying(multiRowArr[0], ROW, COL, indexOfcol);
+	multiPrintArrD(multiRowArr[0], ROW, COL);
 	system("pause");
 	return 0;
 }
 
 
-void randArr(int *ptr, int sizeArr) {
+void randArrD(double *ptr, int sizeArr) {
 	for (int i = 0; i < sizeArr; i++, ptr++)
-		*ptr = rand() % 19 - 9;
+		*ptr = double(rand() % 5000 - 2500)/100;
 }
-
-void printArr(int *ptr, int sizeArr) {
-	for (int i = 0; i < sizeArr; i++, ptr++)
-		printf("%3d ", *ptr);
-}
-
-int minimum(int *ptr, int *iptr, int size) {
-	int min = *ptr++;
-	*iptr = 0;
-	for (int i = 1; i < size; i++, ptr++) {
-		if (*ptr < min) {
-			min = *ptr;
-			*iptr = i;
-		}
+void multiRandArrD(double *ptr, int row, int col) {
+	for (int i = 0; i < row; i++, ptr += col) {
+		randArrD(ptr, col);
 	}
-	return min;
 }
+
+void printArrD(double *ptr, int sizeArr) {
+	for (int i = 0; i < sizeArr; i++, ptr++)
+		printf("%6.2f ", *ptr);
+}
+void multiPrintArrD(double *ptr, int row, int col) {
+	for (int i = 0; i < row; i++, ptr += col) {
+		printArrD(ptr, col);
+		cout << endl;
+	}
+}
+
+void denying(double *ptr, int row, int col, int iCol) {
+	ptr = ptr + iCol;
+	for (int i = 0; i < row; i++, ptr += col) *ptr = -(*ptr);
+}
+void denying5COL(double *ptr, int row, int iCol) {
+	ptr = ptr + iCol;
+	for (int i = 0; i < row; i++, ptr += 5) *ptr = -(*ptr);
+}
+
