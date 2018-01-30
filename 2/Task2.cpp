@@ -6,17 +6,18 @@
 +1) инициализацию массива, 
 +2) вывод на консоль, 
 +3) поиск первого отрицательного, 
-4) последнего положительного и 
-5) обмен местами двух элементов массива.*/
++4) последнего положительного и 
++5) обмен местами двух элементов массива.*/
 
 #include <iostream>
 #include <ctime>
-#define SIZE 50
+#define SIZE 10
 using namespace std;
 void randArr(int *ptr, int sizeArr);  //1) инициализацию массива, 
 void printArr(int *ptr, int sizeArr); //2) вывод на консоль, 
 int firstNegative(int *ptr, int sizeArr); //3) поиск первого отрицательного, 
 int lastPositive(int *ptr, int sizeArr);
+void change(int*ptr1, int*ptr2);
 int main()
 {	
 	setlocale(LC_ALL, "rus");
@@ -32,9 +33,7 @@ int main()
 	fPtr = oneRowArr + indexOfFN;
 	indexOfFN = lastPositive(oneRowArr, SIZE);
 	lPtr = oneRowArr + indexOfFN;
-	int tmp = *fPtr;
-	*fPtr = *lPtr;
-	*lPtr = tmp;
+	change(fPtr, lPtr);
 	cout << "Итоговый массив: " << endl;
 	printArr(oneRowArr, SIZE);
 	cout << endl;
@@ -62,4 +61,9 @@ int lastPositive(int *ptr, int sizeArr) {
 	ptr = ptr + sizeArr - 1;
 	for (int i = sizeArr - 1; i >= 0; i--, ptr--)
 		if (*ptr > 0) return i;
+}
+void change(int*ptr1, int*ptr2) {
+	int tmp = *ptr1;
+	*ptr1 = *ptr2;
+	*ptr2 = tmp;
 }
