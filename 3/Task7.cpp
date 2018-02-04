@@ -8,12 +8,12 @@
 using namespace std;
 void randArr(int *a, int sizeArr);
 void printArr(int *a, int sizeArr);
-void sortByPaste(int *arrPtr, int size);
+void sortByPaste(int *arrPtr, int *endPtr);
 int main()
 {
 	setlocale(LC_ALL, "rus");
 	srand(time(0));
-	int arrA[SIZE];    
+	int arrA[SIZE];
 	//Генерация  массива  А[n]:
 	//(Инициализируем случайными числами)
 	{
@@ -21,25 +21,27 @@ int main()
 		cout << "Исходный массив А[n]:" << endl;
 		printArr(arrA, SIZE);
 	}
-    int *endPtr = arrA+SIZE;
-	sortByPaste(arrA,endPtr);
+	int *endPtr = arrA + SIZE;
+	sortByPaste(arrA, endPtr);
 	printArr(arrA, SIZE);
 	system("pause");
 	return 0;
 }
 
-void sortByPaste(int *arrPtr, int *endPtr){
-    int *maxPtr=arrPtr;
-    int *ptr=arrPtr;
-    while (ptr<endPtr){
-        if (*ptr>*maxPtr) *maxPtr=*ptr;
-        ptr++;
-    }
-    int tmp =*arrPtr;
-    *arrPtr=*maxPtr;
-    *maxPtr=tmp;
-    arrPtr++;
-    sortByPste(arrPtr,endPtr);
+void sortByPaste(int *arrPtr, int *endPtr) {
+	int *maxPtr = arrPtr;
+	int *ptr = arrPtr;
+	while (ptr<endPtr) {
+		if (*ptr>*maxPtr) 
+			maxPtr = ptr;
+		ptr++;
+	}
+	int tmp = *arrPtr;
+	*arrPtr = *maxPtr;
+	*maxPtr = tmp;
+	arrPtr++;
+	if (arrPtr<endPtr) 
+		sortByPaste(arrPtr, endPtr);
 }
 
 void randArr(int *a, int sizeArr) {
