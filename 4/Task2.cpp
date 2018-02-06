@@ -1,31 +1,61 @@
 /*
-1.​ Напишите перегруженную функцию myArea, которая вычисляет площадь
-
-а) квадрата (один параметр)
-
-b) прямоугольника (два параметра)
+Написать функцию, которая меняет порядок элементов 
+передаваемого массива на обратный. Внутри функции 
+запрещено использовать вспомогательный массив. Использовать
+шаблон для реализации функций, работающих с различными типами массивов.
 */
 #include <iostream>
-#define LEN 5
-#define WIDTH 3
-#define HEIGHT 7
+#define LEN 15
 using namespace std;
-int myArea(int lenSq);
-int myArea(int width, int height);
+void randArr(int *a, int sizeArr);
+void printArr(int *a, int sizeArr);
+void randArr(double *a, int sizeArr);
+void printArr(double *a, int sizeArr);
+template <typename mYtype>
+mYtype reversArr(mYtype *a, int size) {
+	mYtype *end;
+	end = a + size - 1;
+	while (a<end)
+	{
+		mYtype tmp = *a;
+		*a++ = *end;
+		*end-- = tmp;
+		return 0;
+	}
+}
 int main() {
 	setlocale(LC_ALL, "rus");
+	int arrInt[LEN];
+	double arrDouble[LEN];
 
-	cout << "Площадь квадрата со стороной " << LEN << " равна " << myArea(LEN) << endl;
-	cout << "Площадь прямоугольника со сторонами " << WIDTH << " и "
-		<< HEIGHT << " равна " << myArea(WIDTH, HEIGHT) << endl;
+	randArr(arrInt, LEN);
+	printArr(arrInt, LEN);
+	reversArr(arrInt, LEN);
+	printArr(arrInt, LEN);
+	randArr(arrDouble, LEN);
+	printArr(arrDouble, LEN);
+	reversArr(arrDouble, LEN);
+	printArr(arrDouble, LEN);
 
 	system("pause");
 	return 0;
 }
 
-int myArea(int lenSq) {
-	return lenSq * lenSq;
+void randArr(int *a, int sizeArr) {
+	for (int i = 0; i<sizeArr; i++, a++)
+		*a = rand() % 21 - 10;
 }
-int myArea(int width, int height) {
-	return width * height;
+void printArr(int *a, int sizeArr) {
+	for (int i = 0; i < sizeArr; i++, a++)
+		cout << *a << " ";
+	cout << endl;
+}
+void randArr(double *a, int sizeArr) {
+	for (int i = 0; i< sizeArr; i++, a++)
+		*a = double(rand() % 20001 - 10000)/100;
+}
+void printArr(double *a, int sizeArr) {
+	for (int i = 0; i < sizeArr; i++, a++)
+		cout << *a << " ";
+	cout << endl;
 }
