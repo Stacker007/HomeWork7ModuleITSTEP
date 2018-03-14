@@ -8,15 +8,12 @@ void largerOf(double *a, double *b);
 int main()
 {	
 	setlocale(LC_ALL, "rus");
-	double firstNum, secondNum;
-	double *fPtr, *dPtr;
-	fPtr = &firstNum;
-	dPtr = &secondNum;
+	double firstNum, secondNum;	
 	cout << "Введите первое число: ";
 	cin >> firstNum;
 	cout << "Введите второе число: ";
 	cin >> secondNum;
-	largerOf(fPtr, dPtr);
+	largerOf(&firstNum, &secondNum);
 	cout << "первое число: " << firstNum << endl;
 	cout << "второе число: " << secondNum << endl;
 		
